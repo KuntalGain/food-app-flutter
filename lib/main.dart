@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/screens/product_detail_screen.dart';
 import 'package:food_app/screens/splash_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(),
+      // home: ProductScreen(),
     );
   }
 }
