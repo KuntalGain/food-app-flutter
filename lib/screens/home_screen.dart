@@ -19,23 +19,35 @@ class _HomePageState extends State<HomePage> {
 
   List<Pizza> pizzas = [
     Pizza(
-        imageId:
-            'https://img.freepik.com/premium-vector/top-view-pepperoni-pizza-with-delicious-ingredients-chrome-yellow-background-3d-illustration_317442-845.jpg?w=740',
-        itemName: 'Peporoni Pizza',
-        price: 25.0),
+      imageId:
+          'https://img.freepik.com/premium-vector/top-view-pepperoni-pizza-with-delicious-ingredients-chrome-yellow-background-3d-illustration_317442-845.jpg?w=740',
+      itemName: 'Peporoni Pizza',
+      price: 25.0,
+      description:
+          'A classic American taste! Relish the delectable flavor of Chicken Pepperoni, topped with extra cheese',
+    ),
     Pizza(
-        imageId: 'https://www.dominos.co.in/files/items/Mexican_Green_Wave.jpg',
-        itemName: 'Mexican Green',
-        price: 12.0),
+      imageId: 'https://www.dominos.co.in/files/items/Mexican_Green_Wave.jpg',
+      itemName: 'Mexican Green',
+      price: 12.0,
+      description:
+          'A pizza loaded with crunchy onions, crisp capsicum, juicy tomatoes and jalapeno with a liberal sprinkling of exotic Mexican herbs.',
+    ),
     Pizza(
-        imageId: 'https://www.dominos.co.in/files/items/Veg_Extravaganz.jpg',
-        itemName: 'Veg Extra',
-        price: 15.0),
+      imageId: 'https://www.dominos.co.in/files/items/Veg_Extravaganz.jpg',
+      itemName: 'Veg Extra',
+      price: 15.0,
+      description:
+          'A pizza that decidedly staggers under an overload of golden corn, exotic black olives, crunchy onions, crisp capsicum, succulent mushrooms, juicyfresh tomatoes and jalapeno - with extra cheese to go all around.',
+    ),
     Pizza(
-        imageId:
-            'https://www.dominos.co.in/files/items/MicrosoftTeams-image_(13).png',
-        itemName: 'Non-Veg Supreme',
-        price: 18.0),
+      imageId:
+          'https://www.dominos.co.in/files/items/MicrosoftTeams-image_(13).png',
+      itemName: 'Non-Veg Supreme',
+      price: 18.0,
+      description:
+          'Bite into supreme delight of Black Olives, Onions, Grilled Mushrooms, Pepper BBQ Chicken, Peri-Peri Chicken, Grilled Chicken Rashers',
+    ),
   ];
 
   List<Burger> burgers = [
@@ -74,44 +86,60 @@ class _HomePageState extends State<HomePage> {
 
   List<Momo> momos = [
     Momo(
-        imageId:
-            'https://b.zmtcdn.com/data/pictures/chains/0/21060/18df05cee503aafc336f9a809fad79a3.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A',
-        itemName: 'Stream Momo',
-        price: 2.18),
+      imageId:
+          'https://b.zmtcdn.com/data/pictures/chains/0/21060/18df05cee503aafc336f9a809fad79a3.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A',
+      itemName: 'Stream Momo',
+      price: 2.18,
+      description: '',
+    ),
     Momo(
-        imageId:
-            'https://b.zmtcdn.com/data/dish_photos/1d2/719e7565c20d832a2d63339b561af1d2.jpg?fit=around|130:130&crop=130:130;*,*',
-        itemName: 'Veg Chilly Momo',
-        price: 3.04),
+      imageId:
+          'https://b.zmtcdn.com/data/dish_photos/1d2/719e7565c20d832a2d63339b561af1d2.jpg?fit=around|130:130&crop=130:130;*,*',
+      itemName: 'Veg Chilly Momo',
+      price: 3.04,
+      description: '',
+    ),
     Momo(
-        imageId:
-            'https://b.zmtcdn.com/data/dish_photos/d87/6d084d06270cb0347ede5e26be222d87.jpg?fit=around|130:130&crop=130:130;*,*',
-        itemName: 'Chicken Cheese Momo',
-        price: 3.23),
+      imageId:
+          'https://b.zmtcdn.com/data/dish_photos/d87/6d084d06270cb0347ede5e26be222d87.jpg?fit=around|130:130&crop=130:130;*,*',
+      itemName: 'Chicken Cheese Momo',
+      price: 3.23,
+      description: '',
+    ),
     Momo(
-        imageId:
-            'https://b.zmtcdn.com/data/dish_photos/84b/a5e4e353609cf2a85df363325cec584b.jpg?fit=around|130:130&crop=130:130;*,*',
-        itemName: 'Paneer Momo',
-        price: 2.06),
+      imageId:
+          'https://b.zmtcdn.com/data/dish_photos/84b/a5e4e353609cf2a85df363325cec584b.jpg?fit=around|130:130&crop=130:130;*,*',
+      itemName: 'Paneer Momo',
+      price: 2.06,
+      description: '',
+    ),
   ];
 
   List<Drink> drinks = [
     Drink(
-        'https://b.zmtcdn.com/data/dish_photos/669/f66ce8da982ad3cb046c6fc5d6edf669.jpg',
-        'Thumps Up',
-        1.83),
+        imageId:
+            'https://b.zmtcdn.com/data/dish_photos/669/f66ce8da982ad3cb046c6fc5d6edf669.jpg',
+        itemName: 'Thumps Up',
+        price: 1.83,
+        description: ''),
     Drink(
-        'https://b.zmtcdn.com/data/dish_photos/cf1/045000c0af348548f55559bf6c7d2cf1.jpg',
-        'Pepsi',
-        1.83),
+        imageId:
+            'https://b.zmtcdn.com/data/dish_photos/cf1/045000c0af348548f55559bf6c7d2cf1.jpg',
+        itemName: 'Pepsi',
+        price: 1.83,
+        description: ''),
     Drink(
-        'https://b.zmtcdn.com/data/dish_photos/0dd/ac21befe3de31c2f25763113931ee0dd.jpg?fit=around|130:130&crop=130:130;*,*',
-        'Coke',
-        0.84),
+        imageId:
+            'https://b.zmtcdn.com/data/dish_photos/0dd/ac21befe3de31c2f25763113931ee0dd.jpg?fit=around|130:130&crop=130:130;*,*',
+        itemName: 'Coke',
+        price: 0.84,
+        description: ''),
     Drink(
-        'https://b.zmtcdn.com/data/dish_photos/4d6/fb1b4e468e4f859ce9550358800f24d6.jpg?fit=around|130:130&crop=130:130;*,*',
-        'Red Bull',
-        2.06),
+        imageId:
+            'https://b.zmtcdn.com/data/dish_photos/4d6/fb1b4e468e4f859ce9550358800f24d6.jpg?fit=around|130:130&crop=130:130;*,*',
+        itemName: 'Red Bull',
+        price: 2.06,
+        description: ''),
   ];
 
   String selectedCategory = 'Burgers';
@@ -185,8 +213,23 @@ class _HomePageState extends State<HomePage> {
                 itemCount: 4,
                 itemBuilder: (context, index) {
                   if (selectedCategory == 'Pizza') {
-                    return foodItems(pizzas[index].imageId,
-                        pizzas[index].itemName, pizzas[index].price);
+                    return GestureDetector(
+                      onTap: () {
+                        print('Tapped');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                      imageId: pizzas[index].imageId,
+                                      itemName: pizzas[index].itemName,
+                                      itemDescription:
+                                          pizzas[index].description,
+                                      price: pizzas[index].price,
+                                    )));
+                      },
+                      child: foodItems(pizzas[index].imageId,
+                          pizzas[index].itemName, pizzas[index].price),
+                    );
                   } else if (selectedCategory == 'Burgers') {
                     return GestureDetector(
                       onTap: () {
@@ -208,11 +251,40 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   } else if (selectedCategory == 'Momos') {
-                    return foodItems(momos[index].imageId,
-                        momos[index].itemName, momos[index].price);
+                    return GestureDetector(
+                      onTap: () {
+                        print('Tapped');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                      imageId: momos[index].imageId,
+                                      itemName: momos[index].itemName,
+                                      itemDescription: momos[index].description,
+                                      price: momos[index].price,
+                                    )));
+                      },
+                      child: foodItems(momos[index].imageId,
+                          momos[index].itemName, momos[index].price),
+                    );
                   } else if (selectedCategory == 'Drinks') {
-                    return foodItems(drinks[index].imageId,
-                        drinks[index].itemName, drinks[index].price);
+                    return GestureDetector(
+                      onTap: () {
+                        print('Tapped');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                      imageId: drinks[index].imageId,
+                                      itemName: drinks[index].itemName,
+                                      itemDescription:
+                                          drinks[index].description,
+                                      price: drinks[index].price,
+                                    )));
+                      },
+                      child: foodItems(drinks[index].imageId,
+                          drinks[index].itemName, drinks[index].price),
+                    );
                   } else {
                     return SizedBox.shrink();
                   }

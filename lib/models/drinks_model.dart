@@ -1,11 +1,13 @@
 class Drink {
-  String imageId;
-  String itemName;
-  double price;
+  final String imageId;
+  final String itemName;
+  final double price;
+  final String description;
 
-  Drink(
-    this.imageId,
-    this.itemName,
-    this.price,
-  );
+  Drink({
+    required this.imageId,
+    required this.itemName,
+    required this.price,
+    required this.description,
+  });
 }
