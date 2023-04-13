@@ -5,10 +5,12 @@ import '../models/Pizza_model.dart';
 import '../models/burger_model.dart';
 import '../models/drinks_model.dart';
 import '../models/momo_model.dart';
+import '../models/product_model.dart';
 import '../utils/categories.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  List<Product> cartItems = [];
+  HomePage({super.key, required this.cartItems});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -16,6 +18,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> category = ["Burgers", "Pizza", "Momos", "Drinks"];
+
+  // void _addToWishlist(Product item) {
+  //   setState(() {});
+  // }
+
+  void addToCart(Product item) {
+    widget.cartItems.add(item);
+  }
 
   List<Pizza> pizzas = [
     Pizza(
@@ -43,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     Pizza(
       imageId:
           'https://www.dominos.co.in/files/items/MicrosoftTeams-image_(13).png',
-      itemName: 'Non-Veg Supreme',
+      itemName: 'Non-Veg',
       price: 18.0,
       description:
           'Bite into supreme delight of Black Olives, Onions, Grilled Mushrooms, Pepper BBQ Chicken, Peri-Peri Chicken, Grilled Chicken Rashers',
@@ -225,6 +235,7 @@ class _HomePageState extends State<HomePage> {
                                       itemDescription:
                                           pizzas[index].description,
                                       price: pizzas[index].price,
+                                      addToCart: (item) => addToCart(item),
                                     )));
                       },
                       child: foodItems(pizzas[index].imageId,
@@ -243,11 +254,15 @@ class _HomePageState extends State<HomePage> {
                                       itemDescription:
                                           burgers[index].description,
                                       price: burgers[index].price,
+                                      addToCart: (item) => addToCart(item),
                                     )));
                       },
                       child: Container(
-                        child: foodItems(burgers[index].imageId,
-                            burgers[index].itemName, burgers[index].price),
+                        child: foodItems(
+                          burgers[index].imageId,
+                          burgers[index].itemName,
+                          burgers[index].price,
+                        ),
                       ),
                     );
                   } else if (selectedCategory == 'Momos') {
@@ -262,6 +277,7 @@ class _HomePageState extends State<HomePage> {
                                       itemName: momos[index].itemName,
                                       itemDescription: momos[index].description,
                                       price: momos[index].price,
+                                      addToCart: (item) => addToCart(item),
                                     )));
                       },
                       child: foodItems(momos[index].imageId,
@@ -280,6 +296,7 @@ class _HomePageState extends State<HomePage> {
                                       itemDescription:
                                           drinks[index].description,
                                       price: drinks[index].price,
+                                      addToCart: (item) => addToCart(item),
                                     )));
                       },
                       child: foodItems(drinks[index].imageId,

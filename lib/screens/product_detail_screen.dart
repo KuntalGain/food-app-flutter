@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/models/product_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -6,12 +7,15 @@ class ProductScreen extends StatefulWidget {
   String itemName;
   String itemDescription;
   double price;
+  final Function(Product) addToCart;
 
-  ProductScreen(
-      {this.imageId = '',
-      this.itemDescription = '',
-      this.itemName = '',
-      this.price = 0.0});
+  ProductScreen({
+    this.imageId = '',
+    this.itemDescription = '',
+    this.itemName = '',
+    this.price = 0.0,
+    required this.addToCart,
+  });
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -19,6 +23,8 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int quantity = 0;
+  bool isYourFavourite = false;
+  // List<Product> favouriteItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +144,25 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                 ),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (quantity == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            'Choose Quantity First',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )));
+                    } else {
+                      widget.addToCart(Product(
+                          imageId: widget.imageId,
+                          itemName: widget.itemName,
+                          quantity: quantity,
+                          price: widget.price));
+                      print("item added successfully");
+                    }
+                  },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
                     decoration: BoxDecoration(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/models/product_model.dart';
+import 'package:food_app/screens/cart_screen.dart';
 
 import 'package:food_app/screens/home_screen.dart';
 import 'package:food_app/screens/product_detail_screen.dart';
@@ -13,21 +15,56 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget currentScreen = HomePage();
+  late List<Product> cartItems;
+  bool isCheckout = false;
+
+  Widget currentScreen = HomePage(
+    cartItems: [],
+  );
   int selectedIndex = 0;
 
-  List<Widget> _screens = [
-    HomePage(),
-    Container(child: Center(child: Text("My Cart"))),
-    Container(child: Center(child: Text("WishList"))),
-    Container(child: Center(child: Text("My Profile"))),
-  ];
+  late List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    cartItems = [];
+    _screens = [
+      HomePage(
+        cartItems: cartItems,
+      ),
+      MyCartScreen(myCart: cartItems),
+      // Container(child: Center(child: Text("My Cart"))),
+      // Container(child: Center(child: Text("WishList"))),
+      Container(child: Center(child: Text("My Profile"))),
+    ];
+  }
+
+  List<String> _appBarTitle = ["Home", "My Cart", "Profile"];
+  String _title = 'Home';
 
   void _onTabChanged(int index) {
     setState(() {
       selectedIndex = index;
       currentScreen = _screens[index];
+      _title = _appBarTitle[index];
+
+      if (_title == 'My Cart') {
+        isCheckout = true;
+      } else {
+        isCheckout = false;
+      }
     });
+  }
+
+  double totalPrice() {
+    double total = 0.0;
+    cartItems.forEach((product) {
+      total += double.parse(product.price.toString()) *
+          int.parse(product.quantity.toString());
+    });
+
+    return total;
   }
 
   @override
@@ -46,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         elevation: 0,
         title: Text(
-          "Home",
+          _title,
           style: TextStyle(
             color: Colors.black,
           ),
@@ -61,7 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body: currentScreen,
-
+      floatingActionButton: Visibility(
+          visible: isCheckout,
+          child: FloatingActionButton.extended(
+            onPressed: () {},
+            label: Text('Checkout : \$${totalPrice()}'),
+          )),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
         child: GNav(
@@ -76,10 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
             GButton(
               icon: Icons.shopping_cart_outlined,
               text: 'My Cart',
-            ),
-            GButton(
-              icon: Icons.favorite_border,
-              text: 'Wishlist',
             ),
             GButton(
               icon: Icons.person_outline,
