@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_app/models/product_model.dart';
+import 'package:food_app/screens/auth_screen/login_page.dart';
 import 'package:food_app/screens/checkout_screen/card_screen.dart';
 import 'package:food_app/screens/checkout_screen/cart_screen.dart';
 import 'package:food_app/screens/checkout_screen/checkout_screen.dart';
@@ -80,7 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            SystemNavigator.pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
           },
           icon: Icon(
             Icons.exit_to_app,
