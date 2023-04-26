@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_app/models/product_model.dart';
@@ -20,6 +22,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
   late List<Product> cartItems;
   bool isCheckout = false;
   // bool isDark = false;
@@ -71,16 +75,49 @@ class _HomeScreenState extends State<HomeScreen> {
     return total;
   }
 
+  Future<void> addFieldToDocument(
+      String docId, String fieldName, dynamic value) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(docId)
+          .update({fieldName: value});
+      print('Field added successfully!');
+    } catch (e) {
+      print('Error caused by $e');
+    }
+  }
+
+  Future<void> cartListItems() async {
+    try {
+      final CollectionReference itemsRef =
+          FirebaseFirestore.instance.collection('user');
+      final DocumentReference docRef = itemsRef.doc(uid);
+
+      await docRef.update({
+        'cart-items': FieldValue.arrayUnion(
+            cartItems.map((item) => item.toMap()).toList())
+      });
+
+      print('Cart items added successfully!');
+    } catch (e) {
+      print('Error adding cart items: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appbar
+      resizeToAvoidBottomInset: false,
 
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -110,6 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
               setState(() {
                 totalPrice();
               });
+
+              cartListItems();
 
               Navigator.push(
                   context,

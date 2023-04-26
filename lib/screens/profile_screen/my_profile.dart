@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,6 +16,48 @@ class MyProfileScreen extends StatefulWidget {
 class _MyProfileScreenState extends State<MyProfileScreen> {
   Map<String, dynamic>? _userMap;
   String uid = FirebaseAuth.instance.currentUser!.uid;
+  File? _image;
+  bool isUploading = false;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> _updateImage() async {
+    try {
+      String imageId = '';
+
+      if (_image != null) {
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('profile_picture')
+            .child('${_userMap!['username']}.jpg');
+        final uploadTask = storageRef.putFile(_image!);
+
+        setState(() {
+          isUploading = true;
+        });
+        final snapshot = await uploadTask.whenComplete(() => {});
+        imageId = await snapshot.ref.getDownloadURL();
+
+        setState(() {
+          _userMap!['profile_picture'] = imageId;
+        });
+
+        updateData(uid, 'profile_picture', imageId);
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      isUploading = false;
+    }
+  }
 
   @override
   void initState() {
@@ -148,7 +191,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             ),
           ),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              _pickImage(ImageSource.gallery);
+              _updateImage();
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Image Updated Successfully!'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
             child: Container(
               margin: EdgeInsets.all(12),
               padding: EdgeInsets.all(20),
@@ -162,7 +215,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         spreadRadius: 3,
                         offset: Offset(0, 3))
                   ]),
-              child: Text('Change Image'),
+              child: (isUploading)
+                  ? CircularProgressIndicator()
+                  : Text('Change Image'),
             ),
           ),
           GestureDetector(

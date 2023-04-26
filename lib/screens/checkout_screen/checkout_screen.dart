@@ -23,7 +23,8 @@ class CheckOutScreen extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: CircleAvatar(
-                backgroundImage: NetworkImage(
+                backgroundColor: Colors.white,
+                backgroundImage: AssetImage(
                   'Assets/check.jpg',
                 ),
                 radius: 100,

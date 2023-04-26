@@ -68,6 +68,8 @@ class _SignUpPageState extends State<SignUpPage> {
         'username': usernameController.text,
         'email': emailController.text,
         'profile_picture': profilePictureUrl,
+        'password': passwordController.text,
+        'cart-items': [],
       });
 
       // update user details
